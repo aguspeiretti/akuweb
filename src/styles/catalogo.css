@@ -1,0 +1,39 @@
+.animado1 {
+  width: 52.5%;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  background-color: rgb(238, 88, 88);
+  transition: 5s ease;
+  position: absolute;
+  left: 0%;
+}
+
+.animado2 {
+  width: 52.5%;
+  height: 100%;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  background-color: rgb(102, 102, 248);
+  transition: 5s ease;
+  position: absolute;
+  right: 0%;
+}
+
+.animado1-active {
+  width: 50%;
+  height: 100%;
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  background-color: rgb(11, 19, 66);
+  transition: 2.5s ease;
+  position: absolute;
+  translate: -100%;
+}
+
+.animado2-active {
+  width: 50%;
+  height: 100%;
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  background-color: rgb(17, 17, 46);
+  transition: 2.5s ease;
+  position: absolute;
+  translate: 100%;
+}

@@ -1,0 +1,29 @@
+.cart1 {
+  position: absolute;
+  right: 0;
+  transition: 1s ease;
+  position: absolute;
+}
+
+.cart2 {
+  position: absolute;
+  right: -300px;
+  transition: 1s ease;
+  position: absolute;
+}
+
+.botonCart1 {
+  position: absolute;
+  right: 260px;
+  bottom: 100px;
+  transition: 1s ease;
+  position: absolute;
+}
+
+.botonCart2 {
+  position: absolute;
+  right: -40px;
+  bottom: 100px;
+  transition: 1s ease;
+  position: absolute;
+}
