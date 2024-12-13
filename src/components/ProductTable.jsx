@@ -62,10 +62,10 @@ const ProductTable = ({ handleEditProduct }) => {
         <table className="w-full border-collapse">
           <thead className="sticky top-0 bg-white z-10 border-b">
             <tr>
-              <th className="px-4 py-2 text-left w-[15%] sticky top-0 bg-white">
+              <th className="px-4 py-2 text-left w-[20%] sticky top-0 bg-white">
                 Categoria
               </th>
-              <th className="px-4 py-2 text-left w-[20%] sticky top-0 bg-white">
+              <th className="px-4 py-2 text-left w-[25%] sticky top-0 bg-white">
                 Título
               </th>
               <th className="px-4 py-2 text-left w-[10%] sticky top-0 bg-white">
@@ -74,13 +74,13 @@ const ProductTable = ({ handleEditProduct }) => {
               {/* <th className="px-4 py-2 text-center w-[10%] sticky top-0 bg-white">
                 Stock
               </th> */}
-              <th className="px-4 py-2 text-center w-[10%] sticky top-0 bg-white">
+              <th className="px-4 py-2 text-center w-[15%] sticky top-0 bg-white">
                 Precio
               </th>
-              <th className="px-4 py-2 text-center w-[15%] sticky top-0 bg-white">
+              <th className="px-4 py-2 text-center w-[20%] sticky top-0 bg-white">
                 Imagen
               </th>
-              <th className="px-4 py-2 text-center w-[15%] sticky top-0 bg-white">
+              <th className="px-4 py-2 text-center w-[20%] sticky top-0 bg-white">
                 Acciones
               </th>
             </tr>
@@ -93,16 +93,16 @@ const ProductTable = ({ handleEditProduct }) => {
                   index % 2 === 0 ? "bg-gray-50" : "bg-white"
                 } hover:bg-gray-100 transition-colors`}
               >
-                <td className="px-4 py-2 w-[15%]">{product.categoria}</td>
-                <td className="px-4 py-2 w-[20%]">{product.titulo}</td>
+                <td className="px-4 py-2 w-[20%]">{product.categoria}</td>
+                <td className="px-4 py-2 w-[25%]">{product.titulo}</td>
                 <td className="px-4 py-2 w-[10%]">{product.talle}</td>
                 {/* <td className="px-4 py-2 text-center w-[10%]">
                   {product.stock}
                 </td> */}
-                <td className="px-4 py-2 text-center w-[10%]">
+                <td className="px-4 py-2 text-center w-[15%]">
                   ${product.precio.toFixed(2)}
                 </td>
-                <td className="px-4 py-2 text-center w-[15%]">
+                <td className="px-4 py-2 text-center w-[20%]">
                   {product.imagen && (
                     <div className="flex justify-center">
                       <img
@@ -113,7 +113,7 @@ const ProductTable = ({ handleEditProduct }) => {
                     </div>
                   )}
                 </td>
-                <td className="px-4 py-2 text-center w-[15%]">
+                <td className="px-4 py-2 text-center w-[20%]">
                   <div className="flex justify-center space-x-2">
                     <button
                       onClick={() => handleEditProduct(product)}

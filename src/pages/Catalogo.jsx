@@ -17,6 +17,8 @@ const Catalogo = () => {
   const { current: productos, loading, error } = useProductos();
   const { addToCart } = useCart();
 
+  const varTalles1 = [0, 1, 2, 4, 6, 8, 10, 12, 16, "S", "M", "L", "XL", "XXL"];
+
   // Obtener categorías y talles únicos
   const categorias = [...new Set(productos.map((p) => p.categoria))];
   // const talles = [...new Set(productos.map((p) => p.talle))];
@@ -129,32 +131,50 @@ const Catalogo = () => {
               ) : filteredProductos.length === 0 ? (
                 <div className="text-center">No se encontraron productos</div>
               ) : (
-                <div className="grid grid-cols-4 gap-4">
+                <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
                   {filteredProductos.map((producto) => (
                     <div
                       key={producto.$id}
-                      className="bg-white rounded-lg shadow-md p-4 flex flex-col"
+                      className="bg-white w-[300px] shadow-lg overflow-hidden transition-transform transform hover:scale-105 rounded-2xl"
                     >
                       {producto.imagen && (
-                        <img
-                          src={producto.imagen}
-                          alt={producto.nombre}
-                          className="w-full h-48 object-contain rounded-t-lg mb-4"
-                        />
+                        <div className="w-full  object-contain flex justify-center  mt-4 ">
+                          <div className="bg-gray-700 w-[90%] h-[250px] rounded-2xl pt-4">
+                            <img
+                              src={producto.imagen}
+                              alt={producto.titulo}
+                              className="w-full  object-cover "
+                            />
+                          </div>
+                        </div>
                       )}
-                      <h3 className="text-lg font-semibold">
-                        {producto.nombre}
-                      </h3>
-                      {/* <p className="text-gray-600">Talle: {producto.talle}</p> */}
-                      <p className="text-xl font-bold text-green-600 mb-2">
-                        ${producto.precio.toFixed(2)}
-                      </p>
-                      <button
-                        onClick={() => handleAddToCart(producto)}
-                        className="bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition"
-                      >
-                        Agregar al Carrito
-                      </button>
+                      <div className="p-4">
+                        <h3 className="text-lg font-semibold text-gray-800 mb-2">
+                          {producto.titulo}
+                        </h3>
+
+                        <div className="mb-4 flex flex-wrap gap-3 justify-center  mt-4 ">
+                          {varTalles1.map((t) => (
+                            <div
+                              key={t}
+                              className="w-6 h-6 rounded-full border-[1px] bg-gray-300 hover:bg-indigo-700 flex items-center justify-center text-xs font-semibold cursor-pointer "
+                            >
+                              {t}
+                            </div>
+                          ))}
+                        </div>
+                        <div className="flex items-center justify-between mt-8">
+                          <p className="w-1/3 text-xl font-bold text-black mb-2">
+                            ${producto.precio.toFixed(2)}
+                          </p>
+                          <button
+                            onClick={() => handleAddToCart(producto)}
+                            className="w-2/3 bg-indigo-700 text-white px-4 py-2 rounded-full hover:bg-blue-700 transition duration-200 flex items-center justify-center"
+                          >
+                            Agregar al Carrito
+                          </button>
+                        </div>
+                      </div>
                     </div>
                   ))}
                 </div>

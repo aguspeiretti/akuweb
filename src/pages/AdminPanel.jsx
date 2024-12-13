@@ -10,7 +10,7 @@ const AdminPanel = () => {
 
   // State for form fields
   const [titulo, setTitulo] = useState("");
-  const [precio, setPrecio] = useState(0);
+  const [precio, setPrecio] = useState(null);
   // const [stock, setStock] = useState(0);
   const [imagen, setImagen] = useState(null);
   const [categoria, setCategoria] = useState("");
@@ -110,6 +110,7 @@ const AdminPanel = () => {
         <section className="bg-white shadow-md rounded-lg p-6 mb-8 w-[300px] h-[calc(100vh-60px)]">
           <form onSubmit={handleSubmit} className="space-y-4">
             <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+              <label htmlFor="Titulo">Titulo</label>
               <input
                 type="text"
                 placeholder="Titulo"
@@ -120,6 +121,7 @@ const AdminPanel = () => {
                   setTitulo(event.target.value);
                 }}
               />
+              <label htmlFor="Categoria">Categoria</label>
               <input
                 type="text"
                 placeholder="Categoria"
@@ -130,6 +132,7 @@ const AdminPanel = () => {
                   setCategoria(event.target.value);
                 }}
               />
+              <label htmlFor="Talle">Talle</label>
               <input
                 type="text"
                 placeholder="Talle"
@@ -140,6 +143,7 @@ const AdminPanel = () => {
                   setTalle(event.target.value);
                 }}
               />
+              <label htmlFor="Precio">Precio</label>
               <input
                 type="number"
                 placeholder="Precio"
@@ -165,6 +169,7 @@ const AdminPanel = () => {
               /> */}
 
               {/* New file input styling */}
+              <label htmlFor="file">Imagen</label>
               <div>
                 <input
                   type="file"
