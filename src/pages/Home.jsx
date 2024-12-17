@@ -1,12 +1,24 @@
+import { useLocation } from "react-router-dom";
 import Cart from "../components/Cart";
 import FormContacto from "../components/FormContacto";
 import Reviews from "../components/Reviews";
 import StatsBanner from "../components/StatesBanner";
+import { useEffect } from "react";
 
 const Home = () => {
+  const location = useLocation();
+
+  useEffect(() => {
+    if (location.hash) {
+      const element = document.querySelector(location.hash);
+      if (element) {
+        element.scrollIntoView({ behavior: "smooth" });
+      }
+    }
+  }, [location]);
+
   return (
     <div className="w-screen h-auto">
-      <Cart />
       <div className="w-screen h-[100vh] bg-white relative rounded-b-[100px]"></div>
       <div className="w-screen h-[400px] flex justify-center items-center">
         <StatsBanner />
@@ -36,9 +48,13 @@ const Home = () => {
       <div className="w-screen h-[100vh] flex justify-center items-center">
         <Reviews />
       </div>
-      <div className="w-screen h-[100vh] bg-white relative rounded-t-[100px] rounded-b-[100px]">
+      <div
+        id="contacto"
+        className="w-screen h-[100vh] bg-white relative rounded-t-[100px] rounded-b-[100px]"
+      >
         <FormContacto />
       </div>
+      <div className="w-screen h-[50vh] flex justify-center items-center"></div>
     </div>
   );
 };

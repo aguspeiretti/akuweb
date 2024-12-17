@@ -7,10 +7,12 @@ import AdminPanel from "./pages/AdminPanel";
 import Catalogo from "./pages/Catalogo";
 import Checkout from "./pages/Checkout";
 import { useUser } from "./context/UserContext";
+import { useState } from "react";
+import Cart from "./components/Cart";
 
 function App() {
   const user = useUser();
-
+  const [cartOpen, setCartOpen] = useState(false);
   // Verificamos si el usuario es admin
   const isAdmin =
     user.current &&
@@ -18,9 +20,14 @@ function App() {
     user.current.labels.includes("admin");
   console.log(user);
 
+  const handleOpen = () => {
+    setCartOpen(!cartOpen);
+  };
+
   return (
     <CartProvider>
-      <Nav />
+      <Nav handleOpen={handleOpen} />
+      <Cart cartOpen={cartOpen} handleOpen={handleOpen} />
       <Routes>
         <Route
           path="/"

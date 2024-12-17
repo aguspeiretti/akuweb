@@ -1,27 +1,24 @@
-import { useState } from "react";
-import { RiShoppingCartLine } from "react-icons/ri";
 import { useCart } from "../context/CartContext"; // Ajusta la ruta según tu estructura
+import { VscArrowCircleRight } from "react-icons/vsc";
 import "../styles/cart.css";
 
-const Cart = () => {
-  const [cartOpen, setCartOpen] = useState(false);
+const Cart = ({ cartOpen, handleOpen }) => {
   const { cart, removeFromCart, updateQuantity, getTotalPrice } = useCart();
-
-  const handleOpen = () => {
-    setCartOpen(!cartOpen);
-  };
-
   return (
     <>
       <div
         className={`${
           cartOpen
-            ? "w-[300px] h-[calc(100vh-60px)] bg-slate-800 cart1 right-0 z-50 overflow-y-auto p-4 text-white"
-            : "w-[300px] h-[calc(100vh-60px)] bg-slate-800 cart2 right-[-300px] z-50 overflow-y-auto p-4 text-white"
+            ? "w-[300px] h-screen bg-white cart1 top-0 right-0 z-50 overflow-y-auto p-4 text-black rounded-tl-3xl rounded-bl-3xl shadow-[0_8px_8px_rgba(0,0,0,0.4)]"
+            : "w-[300px] h-screen bg-white cart2 top-0 right-[-300px] z-50 overflow-y-auto p-4 text-black rounded-tl-3xl rounded-bl-3xl[0_8px_8px_rgba(0,0,0,0.4)]"
         }`}
       >
-        <h2 className="text-2xl font-bold mb-4">Carrito de Compras</h2>
-
+        <div className="flex justify-between ">
+          <h2 className="text-lg font-bold mb-4">Carrito de Compras</h2>
+          <p onClick={handleOpen} className="cursor-pointer">
+            <VscArrowCircleRight size={30} className="text-indigo-700" />
+          </p>
+        </div>
         {cart.length === 0 ? (
           <p className="text-center text-gray-400">El carrito está vacío</p>
         ) : (
@@ -84,25 +81,6 @@ const Cart = () => {
             </button>
           </div>
         )}
-      </div>
-
-      <div
-        className={`${
-          cartOpen
-            ? "w-[80px] h-[40px] bg-indigo-700 rounded-full flex justify-center items-center text-indigo-300 botonCart1 right-[260px] bottom-[100px] cursor-pointer"
-            : "w-[80px] h-[40px] bg-indigo-700 rounded-full flex justify-center items-center text-indigo-300 botonCart2 right-[-40px] bottom-[100px] cursor-pointer"
-        }`}
-        onClick={handleOpen}
-      >
-        <div className="w-[40px] flex justify-center items-center z-0 relative">
-          <RiShoppingCartLine size={20} />
-          {cart.length > 0 && (
-            <span className="absolute -top-4 -left-2 bg-red-500 text-white text-xs rounded-full w-5 h-5 flex items-center justify-center">
-              {cart.length}
-            </span>
-          )}
-        </div>
-        <div className="w-[40px]"></div>
       </div>
     </>
   );
