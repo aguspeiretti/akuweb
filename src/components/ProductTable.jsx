@@ -1,3 +1,4 @@
+/* eslint-disable react/prop-types */
 import { FaTrashCan } from "react-icons/fa6";
 import { FaPencil } from "react-icons/fa6";
 import { useProductos } from "../context/crudProductos";
