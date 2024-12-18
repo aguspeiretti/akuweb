@@ -1,21 +1,67 @@
-.animado1 {
-  width: 52.5%;
-  height: 100%;
-  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
-  background-color: rgb(238, 88, 88);
-  transition: 5s ease;
-  position: absolute;
-  left: 0%;
-}
-
+/* Estilos base de las imágenes */
+.animado1,
 .animado2 {
   width: 52.5%;
   height: 100%;
-  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
-  background-color: rgb(102, 102, 248);
-  transition: 5s ease;
   position: absolute;
-  right: 0%;
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  transition: transform 0.5s ease, filter 0.5s ease;
+}
+
+.animado1 {
+  clip-path: polygon(0 0, 100% 0, 90% 100%, 0 100%);
+  left: 0;
+  background-image: url("../assets/images/coles.jpg");
+}
+
+.animado2 {
+  clip-path: polygon(10% 0, 100% 0, 100% 100%, 0 100%);
+  right: 0;
+  background-image: url("../assets/images/ambos.webp");
+}
+
+/* Estilos del título */
+.titulo {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  font-size: 2rem;
+  color: white;
+  text-align: center;
+  opacity: 0; /* Oculto por defecto */
+  transition: opacity 0.5s ease;
+  z-index: 10;
+}
+
+/* Hover en .animado1 */
+.animado1:hover {
+  transform: scale(1.05);
+  z-index: 5;
+}
+
+.animado1:hover ~ .animado2 {
+  filter: blur(5px);
+}
+
+.animado1:hover .titulo {
+  opacity: 1;
+}
+
+/* Hover en .animado2 */
+.animado2:hover {
+  transform: scale(1.05);
+  z-index: 5;
+}
+
+.animado2:hover ~ .animado1 {
+  filter: blur(15px);
+}
+
+.animado2:hover .titulo {
+  opacity: 1;
 }
 
 .animado1-active {

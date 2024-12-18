@@ -50,7 +50,7 @@ const Home = () => {
       </div>
       <div
         id="contacto"
-        className="w-screen h-[100vh] bg-white relative rounded-t-[100px] rounded-b-[100px]"
+        className="w-screen h-[100vh] flex justify-center items-center bg-white relative rounded-t-[100px] rounded-b-[100px]"
       >
         <FormContacto />
       </div>

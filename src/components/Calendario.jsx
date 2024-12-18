@@ -151,7 +151,7 @@ const Calendario = () => {
   };
 
   return (
-    <div className="bg-transparent text-black rounded md:p-4 p-2">
+    <div className="bg-transparent text-black rounded md:p-4 p-2 mt-16">
       {currentView === "calendar" && (
         <div>
           <div className="flex justify-center mb-8">

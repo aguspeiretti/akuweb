@@ -64,13 +64,17 @@ const Catalogo = () => {
             animationStart ? "animado1 " : "animado1 animado1-active"
           }`}
           onClick={() => handleAnimation("cat1")}
-        ></div>
+        >
+          <h2 className="titulo">Título 1</h2>
+        </div>
         <div
           className={`${
             animationStart ? "animado2" : "animado2 animado2-active"
           }`}
           onClick={() => handleAnimation("cat2")}
-        ></div>
+        >
+          <h2 className="titulo">Título 2</h2>
+        </div>
 
         {catSelected === "cat2" ? (
           <div className="text-white w-[100%] h-[100%] bg-gray-900 flex p-2 gap-2">
