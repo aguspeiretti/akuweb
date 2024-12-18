@@ -22,11 +22,11 @@ const Home = () => {
   return (
     <div className="w-screen h-auto">
       <Nav handleOpen={handleOpen} />
-      <div className="w-screen h-[100vh] bg-white relative rounded-b-[100px]"></div>
+      <div className="w-screen h-[100vh] bg-white relative rounded-b-[100px] shadow-xl shadow-indigo-500/20"></div>
       <div className="w-screen h-[400px] flex justify-center items-center">
         <StatsBanner />
       </div>
-      <div className="w-screen h-[100vh] bg-white relative rounded-t-[100px] rounded-b-[100px] py-8 px-[40px] flex flex-col">
+      <div className="w-screen h-[100vh] bg-white relative rounded-t-[100px] rounded-b-[100px] py-8 px-[40px] flex flex-col shadow-xl shadow-indigo-500/20">
         {/* Contenedor del Texto */}
         <div className="flex  w-full flex-none mt-8 mb-8">
           <p className="text-black w-[50%] font-bold text-[40px] text-center">
@@ -40,7 +40,7 @@ const Home = () => {
           </p>
         </div>
         {/* Contenedor Grid */}
-        <div className="w-full grid grid-cols-2 sm:grid-cols-2 gap-4 px-24 flex-grow overflow-auto pb-4">
+        <div className="w-full grid grid-cols-2 sm:grid-cols-2 gap-4 px-24 flex-grow overflow-auto pb-4 shadow-xl shadow-indigo-500/20">
           <div className="w-[100%] bg-white rounded-3xl relative shadow-[0_8px_8px_rgba(0,0,0,0.4)]"></div>
           <div className="w-[100%] bg-indigo-700 rounded-3xl relative shadow-[0_8px_8px_rgba(0,0,0,0.2)]"></div>
           <div className="w-[100%] bg-indigo-700 rounded-3xl relative shadow-[0_8px_8px_rgba(0,0,0,0.2)]"></div>
@@ -53,7 +53,7 @@ const Home = () => {
       </div>
       <div
         id="contacto"
-        className="w-screen h-[100vh] flex justify-center items-center bg-white relative rounded-t-[100px] rounded-b-[100px]"
+        className="w-screen h-[100vh] flex justify-center items-center bg-white relative rounded-t-[100px] rounded-b-[100px] shadow-xl shadow-indigo-500/20"
       >
         <FormContacto />
       </div>

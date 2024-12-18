@@ -1,11 +1,14 @@
+import { useState } from "react";
 import NavEstatica from "../components/NavEstatica";
+import { useCart } from "../context/CartContext";
 import { useProductos } from "../context/crudProductos";
 import { useParams } from "react-router-dom";
 
 const ProductDetail = () => {
+  const [selectedTalle, setSelectedTalle] = useState("");
   const { id } = useParams(); // Obtén el ID de los parámetros de la URL
   const { current: productos } = useProductos(); // Obtén la lista de productos desde el contexto
-
+  const { addToCart } = useCart();
   // Encuentra el producto que coincide con el id
   const item = productos?.find((producto) => producto.$id === id);
 
@@ -17,6 +20,8 @@ const ProductDetail = () => {
       </div>
     );
   }
+
+  const varTalles1 = [0, 1, 2, 4, 6, 8, 10, 12, 16, "S", "M", "L", "XL", "XXL"];
 
   return (
     <div className="w-full h-[calc(100vh-60px)]  text-white bg-kblac bg-opacity-80">
@@ -55,9 +60,24 @@ const ProductDetail = () => {
               <p>TAMAÑOS</p>
               <div className="flex gap-4 mt-4">
                 <div>
-                  <select className="w-[150px] h-[50px]" name="" id=""></select>
+                  <select
+                    aria-placeholder="TALLE"
+                    className="w-[150px] h-[50px]  p-2 rounded text-black"
+                    value={selectedTalle}
+                    onChange={(e) => setSelectedTalle(e.target.value)}
+                  >
+                    <option value="">Todos los Talles</option>
+                    {varTalles1.map((talle) => (
+                      <option key={talle} value={talle}>
+                        {talle}
+                      </option>
+                    ))}
+                  </select>
                 </div>
-                <div className="w-[150px] h-[50px] text-center">
+                <div
+                  className="w-[150px] h-[50px] text-center bg-indigo-700 flex justify-center items-center font-semibold rounded cursor-pointer"
+                  onClick={() => addToCart(item)}
+                >
                   Agregar al carrito
                 </div>
               </div>

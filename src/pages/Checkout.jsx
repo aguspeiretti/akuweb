@@ -1,22 +1,19 @@
 import { useState } from "react";
 import { useCart } from "../context/CartContext"; // Asumo que tienes un contexto de carrito
-
+import { ImWhatsapp } from "react-icons/im";
 const Checkout = () => {
-  // const { cartItems } = useCart(); // Obtener items del carrito
-
-  const cartItems = ["remera", "pantalon", "pollera"];
-
-  const [customerData, setCustomerData] = useState({
-    name: "",
-    phone: "",
-    email: "",
-  });
+  const { cart, getTotalPrice } = useCart(); // Obtener items del carrito
 
   const [orderSent, setOrderSent] = useState(false);
+  const [formData, setFormData] = useState({
+    nombreCompleto: "",
+    email: "",
+    telefono: "",
+  });
 
-  const handleInputChange = (e) => {
+  const handleChange = (e) => {
     const { name, value } = e.target;
-    setCustomerData((prev) => ({
+    setFormData((prev) => ({
       ...prev,
       [name]: value,
     }));
@@ -24,22 +21,22 @@ const Checkout = () => {
 
   const generateWhatsAppMessage = () => {
     // Genera el mensaje de pedido
-    const productList = cartItems
+    const productList = cart
       .map(
         (item) =>
-          `- ${item.name} x${item.quantity} ($${item.price * item.quantity})`
+          `- ${item.titulo} x${item.cantidad} ($${item.precio * item.cantidad})`
       )
       .join("\n");
 
-    const total = cartItems.reduce(
-      (sum, item) => sum + item.price * item.quantity,
+    const total = cart.reduce(
+      (sum, item) => sum + item.precio * item.cantidad,
       0
     );
 
     return `*Nuevo Pedido*\n
-Nombre: ${customerData.name}
-Teléfono: ${customerData.phone}
-Email: ${customerData.email}
+Nombre: ${formData.nombreCompleto}
+Teléfono: ${formData.telefono}
+Email: ${formData.email}
 
 *Productos:*
 ${productList}
@@ -86,51 +83,95 @@ Por favor, confirme disponibilidad de productos.`;
   }
 
   return (
-    <div className="max-w-md mx-auto p-6 bg-white shadow-md rounded-lg">
-      <h2 className="text-2xl font-bold mb-6 text-center">Finalizar Pedido</h2>
-      <form onSubmit={handleSubmit}>
-        <div className="mb-4">
-          <label className="block mb-2">Nombre Completo</label>
+    <div className="finalizar w-screen h-screen flex pt-10 pl-4">
+      <div className="w-1/2 h-5/6  rounded-xl bg-slate-600 opacity-90 relative ">
+        <h2 className="text-white text-1xl font-bold px-8 py-4">Mi pedido</h2>
+        <div>
+          <table className="w-full">
+            <thead className="bg-black bg-opacity-50 ">
+              <tr>
+                <th className="px-4 py-2 text-left ">Título</th>
+                <th className="px-4 py-2 text-center">talle</th>
+                <th className="px-4 py-2  text-center">Cantidad</th>
+              </tr>
+            </thead>
+            <tbody className="">
+              {cart.map((product, index) => (
+                <tr
+                  key={index}
+                  className={
+                    index % 2 === 0
+                      ? "bg-gray-200 bg-opacity-50"
+                      : "bg-gray-400 h-10 bg-opacity-50"
+                  }
+                >
+                  <td className="px-4 py-2">{product.titulo}</td>
+                  <td className="px-4 py-2 text-center">{product.talle}</td>
+                  <td className="px-4 py-2 text-center">{product.cantindad}</td>
+                </tr>
+              ))}
+            </tbody>
+          </table>
+        </div>
+        <div className="absolute bottom-5 h-10 w-full bg-slate-400 flex items-center justify-end pr-8">
+          <p className="mr-2">Total: </p>
+          <div className="font-bold"> ${getTotalPrice().toFixed(2)}</div>
+        </div>
+      </div>
+      <div className=" w-1/2 flex flex-col justify-start items-center">
+        <h1 className="text-white text-2xl mb-10">
+          Complete los campos para finalizar la compra
+        </h1>
+        <form className="w-2/3 mt-4">
+          <label className="block mb-2 text-white" htmlFor="nombreCompleto">
+            Nombre Completo:
+          </label>
           <input
             type="text"
-            name="name"
-            value={customerData.name}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
+            id="nombreCompleto"
+            name="nombreCompleto"
+            value={formData.nombreCompleto}
+            onChange={handleChange}
+            className="w-full p-2 mb-2 rounded"
             required
           />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2">Teléfono</label>
-          <input
-            type="tel"
-            name="phone"
-            value={customerData.phone}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
-            required
-          />
-        </div>
-        <div className="mb-4">
-          <label className="block mb-2">Email (opcional)</label>
+
+          <label className="block mb-2 text-white" htmlFor="email">
+            Email:
+          </label>
           <input
             type="email"
+            id="email"
             name="email"
-            value={customerData.email}
-            onChange={handleInputChange}
-            className="w-full p-2 border rounded"
+            value={formData.email}
+            onChange={handleChange}
+            className="w-full p-2 mb-2 rounded"
+            required
+            pattern="[^\s@]+@[^\s@]+\.[^\s@]+"
           />
-        </div>
 
-        <div className="mt-6">
-          <button
-            type="submit"
-            className="w-full bg-green-500 text-white py-2 rounded hover:bg-green-600 transition"
-          >
-            Enviar Pedido por WhatsApp
-          </button>
-        </div>
-      </form>
+          <label className="block mb-2 text-white" htmlFor="telefono">
+            Teléfono:
+          </label>
+          <input
+            type="tel"
+            id="telefono"
+            name="telefono"
+            value={formData.telefono}
+            onChange={handleChange}
+            className="w-full p-2 mb-4 rounded"
+            required
+            pattern="[0-9]+"
+          />
+        </form>
+
+        <button
+          onClick={handleSubmit}
+          className="bg-lime-600 p-2 text-white rounded-lg mt-2"
+        >
+          Enviar pedido por <ImWhatsapp />
+        </button>
+      </div>
     </div>
   );
 };

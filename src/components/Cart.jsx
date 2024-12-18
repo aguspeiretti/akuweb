@@ -1,11 +1,17 @@
 import { useCart } from "../context/CartContext"; // Ajusta la ruta según tu estructura
 import { VscArrowCircleRight } from "react-icons/vsc";
 import "../styles/cart.css";
+import { Link } from "react-router-dom";
 
 const Cart = () => {
-  const { cartOpen, handleOpen } = useCart();
-
-  const { cart, removeFromCart, updateQuantity, getTotalPrice } = useCart();
+  const {
+    cartOpen,
+    handleOpen,
+    cart,
+    removeFromCart,
+    updateQuantity,
+    getTotalPrice,
+  } = useCart();
   return (
     <>
       <div
@@ -75,12 +81,15 @@ const Cart = () => {
               <span className="text-xl">${getTotalPrice().toFixed(2)}</span>
             </div>
 
-            <button
-              className="w-full mt-4 bg-green-600 text-white py-2 rounded hover:bg-green-700"
-              // Implementa la lógica de checkout aquí
-            >
-              Finalizar Compra
-            </button>
+            <Link to={"/checkout"}>
+              {" "}
+              <button
+                className="w-full mt-4 bg-green-600 text-white py-2 rounded hover:bg-green-700"
+                // Implementa la lógica de checkout aquí
+              >
+                Finalizar Compra
+              </button>
+            </Link>
           </div>
         )}
       </div>

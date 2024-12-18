@@ -17,7 +17,7 @@ const NavEstatica = () => {
   const user = useUser();
 
   return (
-    <nav className="flex w-screen justify-center relative  z-50 ">
+    <nav className="flex w-screen justify-center relative  z-30 ">
       <div className="w-screen flex justify-between h-[60px] items-center text-white bg-black/80 px-8">
         <div className="flex gap-14">
           <Link to={"/"}>

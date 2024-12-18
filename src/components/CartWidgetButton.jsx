@@ -1,9 +1,8 @@
-import { useState } from "react";
 import { RiShoppingCartLine } from "react-icons/ri";
 import { useCart } from "../context/CartContext";
 
-const CartWidgetButton = ({ handleOpen }) => {
-  const { cart, removeFromCart, updateQuantity, getTotalPrice } = useCart();
+const CartWidgetButton = () => {
+  const { cart, handleOpen } = useCart();
 
   return (
     <>
