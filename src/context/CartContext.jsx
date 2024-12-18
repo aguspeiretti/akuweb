@@ -14,6 +14,7 @@ export const useCart = () => {
 };
 
 const CartProvider = ({ children }) => {
+  const [cartOpen, setCartOpen] = useState(false);
   const [cart, setCart] = useState(() => {
     // Inicializar desde localStorage si existe
     const savedCart = localStorage.getItem("cart");
@@ -86,6 +87,10 @@ const CartProvider = ({ children }) => {
     );
   };
 
+  const handleOpen = () => {
+    setCartOpen(!cartOpen);
+  };
+
   return (
     <CartContext.Provider
       value={{
@@ -97,6 +102,8 @@ const CartProvider = ({ children }) => {
         clearCart,
         getTotalItems,
         getTotalPrice,
+        handleOpen,
+        cartOpen,
       }}
     >
       {children}

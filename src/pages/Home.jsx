@@ -1,12 +1,14 @@
 import { useLocation } from "react-router-dom";
-import Cart from "../components/Cart";
 import FormContacto from "../components/FormContacto";
 import Reviews from "../components/Reviews";
 import StatsBanner from "../components/StatesBanner";
 import { useEffect } from "react";
+import Nav from "../components/Nav";
+import { useCart } from "../context/CartContext";
 
 const Home = () => {
   const location = useLocation();
+  const { handleOpen } = useCart();
 
   useEffect(() => {
     if (location.hash) {
@@ -19,6 +21,7 @@ const Home = () => {
 
   return (
     <div className="w-screen h-auto">
+      <Nav handleOpen={handleOpen} />
       <div className="w-screen h-[100vh] bg-white relative rounded-b-[100px]"></div>
       <div className="w-screen h-[400px] flex justify-center items-center">
         <StatsBanner />

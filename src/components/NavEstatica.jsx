@@ -1,4 +1,4 @@
-import { useState, useEffect } from "react";
+import { useState } from "react";
 import { useUser } from "../context/UserContext";
 import LoginAppwrite from "../pages/LoginAppwrite";
 import "../styles/nav.css";
@@ -6,50 +6,22 @@ import CartWidgetButton from "./CartWidgetButton";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
 
-const Nav = () => {
+const NavEstatica = () => {
+  const { handleOpen } = useCart();
   const [loginActive, setLoginActive] = useState(false);
-  const [isVisible, setIsVisible] = useState(true); // Estado para controlar visibilidad
-  const [lastScrollY, setLastScrollY] = useState(0); // Guarda la posición previa del scroll
-  const { handleOpen } = useCart;
+
   const handleActive = () => {
     setLoginActive(!loginActive);
   };
 
   const user = useUser();
 
-  useEffect(() => {
-    const handleScroll = () => {
-      const currentScrollY = window.scrollY;
-
-      if (currentScrollY > lastScrollY && currentScrollY > 50) {
-        // Desaparece si el scroll baja y está más allá de los 50px
-        setIsVisible(false);
-      } else {
-        // Aparece si el scroll sube o está quieto
-        setIsVisible(true);
-      }
-
-      setLastScrollY(currentScrollY);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-
-    // Cleanup para evitar fugas de memoria
-    return () => {
-      window.removeEventListener("scroll", handleScroll);
-    };
-  }, [lastScrollY]);
-
   return (
-    <nav
-      className={`flex w-screen justify-center mt-6 fixed z-30 transition-transform duration-300 ${
-        isVisible ? "translate-y-0" : "-translate-y-[200px]"
-      }`}
-    >
-      <div className="w-[95vw] flex rounded-full justify-between h-[60px] items-center text-white bg-black/80 px-8">
+    <nav className="flex w-screen justify-center relative  z-50 ">
+      <div className="w-screen flex justify-between h-[60px] items-center text-white bg-black/80 px-8">
         <div className="flex gap-14">
           <Link to={"/"}>
-            <img src="" alt="logo" />
+            <img src="" alt="logo" />{" "}
           </Link>
           <ul className="flex items-center gap-8">
             <Link to={"catalogo"}>
@@ -106,4 +78,4 @@ const Nav = () => {
   );
 };
 
-export default Nav;
+export default NavEstatica;

@@ -2,7 +2,9 @@ import { useCart } from "../context/CartContext"; // Ajusta la ruta según tu es
 import { VscArrowCircleRight } from "react-icons/vsc";
 import "../styles/cart.css";
 
-const Cart = ({ cartOpen, handleOpen }) => {
+const Cart = () => {
+  const { cartOpen, handleOpen } = useCart();
+
   const { cart, removeFromCart, updateQuantity, getTotalPrice } = useCart();
   return (
     <>
