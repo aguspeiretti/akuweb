@@ -70,7 +70,7 @@ const ProductTable = ({ handleEditProduct }) => {
                 Título
               </th>
               <th className="px-4 py-2 text-left w-[10%] sticky top-0 bg-white">
-                Talle
+                Detalle
               </th>
               {/* <th className="px-4 py-2 text-center w-[10%] sticky top-0 bg-white">
                 Stock
@@ -96,7 +96,7 @@ const ProductTable = ({ handleEditProduct }) => {
               >
                 <td className="px-4 py-2 w-[20%]">{product.categoria}</td>
                 <td className="px-4 py-2 w-[25%]">{product.titulo}</td>
-                <td className="px-4 py-2 w-[10%]">{product.talle}</td>
+                <td className="px-4 py-2 w-[10%]">{product.detalle}</td>
                 {/* <td className="px-4 py-2 text-center w-[10%]">
                   {product.stock}
                 </td> */}

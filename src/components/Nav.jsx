@@ -5,12 +5,13 @@ import "../styles/nav.css";
 import CartWidgetButton from "./CartWidgetButton";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
-
+import logo from "../assets/images/logosoloblanco.webp";
 const Nav = () => {
   const [loginActive, setLoginActive] = useState(false);
   const [isVisible, setIsVisible] = useState(true); // Estado para controlar visibilidad
   const [lastScrollY, setLastScrollY] = useState(0); // Guarda la posición previa del scroll
   const { handleOpen } = useCart;
+
   const handleActive = () => {
     setLoginActive(!loginActive);
   };
@@ -49,7 +50,7 @@ const Nav = () => {
       <div className="w-[95vw] flex rounded-full justify-between h-[60px] items-center text-white bg-black/80 px-8">
         <div className="flex gap-14">
           <Link to={"/"}>
-            <img src="" alt="logo" />
+            <img src={logo} alt="logo" />
           </Link>
           <ul className="flex items-center gap-8">
             <Link to={"catalogo"}>

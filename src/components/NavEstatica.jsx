@@ -5,6 +5,7 @@ import "../styles/nav.css";
 import CartWidgetButton from "./CartWidgetButton";
 import { Link } from "react-router-dom";
 import { useCart } from "../context/CartContext";
+import logo from "../assets/images/logosoloblanco.webp";
 
 const NavEstatica = () => {
   const { handleOpen } = useCart();
@@ -21,7 +22,7 @@ const NavEstatica = () => {
       <div className="w-screen flex justify-between h-[60px] items-center text-white bg-black/80 px-8">
         <div className="flex gap-14">
           <Link to={"/"}>
-            <img src="" alt="logo" />{" "}
+            <img src={logo} alt="logo" />{" "}
           </Link>
           <ul className="flex items-center gap-8">
             <Link to={"catalogo"}>

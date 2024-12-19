@@ -31,22 +31,24 @@ const CartProvider = ({ children }) => {
     setCart((prevCart) => {
       // Verificar si el producto ya existe en el carrito
       const existingItemIndex = prevCart.findIndex(
-        (item) => item.$id === producto.$id
+        (item) => item.$id === producto.$id && item.talle === producto.talle
       );
 
       if (existingItemIndex > -1) {
-        // Si existe, incrementar la cantidad
+        // Si existe, incrementar la cantidad en 1
         const newCart = [...prevCart];
-        newCart[existingItemIndex].cantidad =
-          (newCart[existingItemIndex].cantidad || 1) + (producto.cantidad || 1);
+        newCart[existingItemIndex] = {
+          ...newCart[existingItemIndex],
+          cantidad: newCart[existingItemIndex].cantidad + 1,
+        };
         return newCart;
       } else {
-        // Si no existe, agregar nuevo producto
+        // Si no existe, agregar nuevo producto con cantidad 1
         return [
           ...prevCart,
           {
             ...producto,
-            cantidad: producto.cantidad || 1,
+            cantidad: 1,
           },
         ];
       }

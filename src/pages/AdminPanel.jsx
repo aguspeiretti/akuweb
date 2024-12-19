@@ -2,6 +2,7 @@ import { useState, useRef } from "react";
 import { useProductos } from "../context/crudProductos";
 import { useUser } from "../context/UserContext";
 import ProductTable from "../components/ProductTable";
+import NavEstatica from "../components/NavEstatica";
 
 const AdminPanel = () => {
   const user = useUser();
@@ -14,7 +15,9 @@ const AdminPanel = () => {
   // const [stock, setStock] = useState(0);
   const [imagen, setImagen] = useState(null);
   const [categoria, setCategoria] = useState("");
-  const [talle, setTalle] = useState("");
+  // const [talle, setTalle] = useState("");
+  const [subcategoria, setSubCategoria] = useState("");
+  const [detalle, setDeTalle] = useState("");
 
   // New state for editing
   const [editingProduct, setEditingProduct] = useState(null);
@@ -43,7 +46,9 @@ const AdminPanel = () => {
         precio: parseFloat(precio),
         // stock: parseInt(stock, 10),
         categoria,
-        talle,
+        // talle,
+        detalle,
+        subcategoria,
       };
 
       if (editingProduct) {
@@ -72,9 +77,11 @@ const AdminPanel = () => {
       setPrecio(0);
       // setStock(0);
       setImagen(null);
+      setDeTalle("");
+      setSubCategoria("");
       setEditingProduct(null);
       setCategoria("");
-      setTalle("");
+      // setTalle("");
     } catch (err) {
       console.error("Error en el submit:", err);
       alert("Hubo un problema al guardar el producto");
@@ -86,9 +93,11 @@ const AdminPanel = () => {
     setEditingProduct(producto);
     setTitulo(producto.titulo);
     setPrecio(producto.precio);
+    setSubCategoria(producto.subcategoria);
     // setStock(producto.stock);
     setCategoria(producto.categoria);
-    setTalle(producto.talle);
+    // setTalle(producto.talle);
+    setDeTalle(producto.detalle);
     setImagen(null);
   };
 
@@ -100,63 +109,105 @@ const AdminPanel = () => {
     // setStock(0);
     setImagen(null);
     setCategoria("");
-    setTalle("");
+    setSubCategoria("");
+    // setTalle("");
+    setDeTalle("");
   };
 
   return (
-    <div className="container mx-auto px-4 py-8 flex">
-      {/* Formulario de carga/edición de productos */}
-      {user.current ? (
-        <section className="bg-white shadow-md rounded-lg p-6 mb-8 w-[300px] h-[calc(100vh-60px)]">
-          <form onSubmit={handleSubmit} className="space-y-4">
-            <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
-              <label htmlFor="Titulo">Titulo</label>
-              <input
-                type="text"
-                placeholder="Titulo"
-                value={titulo}
-                required
-                className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950"
-                onChange={(event) => {
-                  setTitulo(event.target.value);
-                }}
-              />
-              <label htmlFor="Categoria">Categoria</label>
-              <input
-                type="text"
-                placeholder="Categoria"
-                value={categoria}
-                required
-                className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950"
-                onChange={(event) => {
-                  setCategoria(event.target.value);
-                }}
-              />
-              <label htmlFor="Talle">Talle</label>
-              <input
-                type="text"
-                placeholder="Talle"
-                value={talle}
-                required
-                className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-950"
-                onChange={(event) => {
-                  setTalle(event.target.value);
-                }}
-              />
-              <label htmlFor="Precio">Precio</label>
-              <input
-                type="number"
-                placeholder="Precio"
-                value={precio}
-                required
-                min="0"
-                step="0.01"
-                className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-900"
-                onChange={(event) => {
-                  setPrecio(parseFloat(event.target.value) || 0);
-                }}
-              />
-              {/* <input
+    <div className="min-h-screen w-screen bg-gray-50">
+      <NavEstatica />
+      <div className="h-[calc(100vh-60px)] flex">
+        {/* Formulario de carga/edición de productos */}
+        {user.current ? (
+          <div className="flex w-full overflow-hidden">
+            <section className="w-80 min-w-80 bg-white shadow-lg overflow-y-auto">
+              <form onSubmit={handleSubmit} className="p-6 space-y-4">
+                <div className="grid grid-cols-1 md:grid-cols-1 gap-4">
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="Titulo"
+                  >
+                    Titulo
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Titulo"
+                    value={titulo}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    onChange={(event) => {
+                      setTitulo(event.target.value);
+                    }}
+                  />
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="Categoria"
+                  >
+                    Categoria
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Categoria..uniformes , ambos , empresas..."
+                    value={categoria}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    onChange={(event) => {
+                      setCategoria(event.target.value);
+                    }}
+                  />
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="Categoria"
+                  >
+                    Subcategoria
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Sub-categorias jockey niños arg...etc"
+                    value={subcategoria}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    onChange={(event) => {
+                      setSubCategoria(event.target.value);
+                    }}
+                  />
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="Detalle"
+                  >
+                    Detalle
+                  </label>
+                  <input
+                    type="text"
+                    placeholder="Detalle"
+                    value={detalle}
+                    required
+                    className="w-full px-3 py-2 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:border-transparent"
+                    onChange={(event) => {
+                      setDeTalle(event.target.value);
+                    }}
+                  />
+
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="Precio"
+                  >
+                    Precio
+                  </label>
+                  <input
+                    type="number"
+                    placeholder="Precio"
+                    value={precio}
+                    required
+                    min="0"
+                    step="0.01"
+                    className="w-full px-3 py-3 border border-gray-300 rounded-md focus:outline-none focus:ring-2 focus:ring-purple-900"
+                    onChange={(event) => {
+                      setPrecio(parseFloat(event.target.value) || 0);
+                    }}
+                  />
+                  {/* <input
                 type="number"
                 placeholder="Stock"
                 value={stock}
@@ -168,56 +219,67 @@ const AdminPanel = () => {
                 }}
               /> */}
 
-              {/* New file input styling */}
-              <label htmlFor="file">Imagen</label>
-              <div>
-                <input
-                  type="file"
-                  ref={fileInputRef}
-                  accept="image/*"
-                  className="hidden"
-                  onChange={handleFileChange}
-                />
-                <button
-                  type="button"
-                  onClick={handleFileButtonClick}
-                  className="w-full bg-gray-100 text-gray-700 py-3 rounded-md border border-gray-300 hover:bg-gray-200 transition duration-300 ease-in-out"
-                >
-                  Seleccionar Imagen
-                </button>
-                {imagen && (
-                  <div className="mt-2 text-sm text-gray-600 truncate">
-                    {imagen.name}
+                  {/* New file input styling */}
+                  <label
+                    className="text-sm font-medium text-gray-700"
+                    htmlFor="file"
+                  >
+                    Imagen
+                  </label>
+                  <div>
+                    <input
+                      type="file"
+                      ref={fileInputRef}
+                      accept="image/*"
+                      className="hidden"
+                      onChange={handleFileChange}
+                    />
+                    <button
+                      type="button"
+                      onClick={handleFileButtonClick}
+                      className="w-full px-4 py-2 bg-gray-100 text-gray-700 rounded-md border border-gray-300 hover:bg-gray-200 transition-colors"
+                    >
+                      Seleccionar Imagen
+                    </button>
+                    {imagen && (
+                      <p className="text-sm text-gray-600 truncate mt-1">
+                        {imagen.name}
+                      </p>
+                    )}
                   </div>
-                )}
-              </div>
+                </div>
+                <div className="flex space-x-4 justify-end">
+                  <button
+                    type="submit"
+                    className="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors"
+                  >
+                    {editingProduct ? "Actualizar " : "Cargar "}
+                  </button>
+                  {editingProduct && (
+                    <button
+                      type="button"
+                      onClick={handleCancelEdit}
+                      className="flex-1 bg-gray-500 text-white py-2 rounded-md hover:bg-gray-600 transition-colors"
+                    >
+                      Cancelar
+                    </button>
+                  )}
+                </div>
+              </form>
+            </section>
+            {/* Table Section */}
+            <div className="flex-1 overflow-hidden">
+              <ProductTable handleEditProduct={handleEditProduct} />
             </div>
-            <div className="flex space-x-4 justify-end">
-              <button
-                type="submit"
-                className="w-[130px] bg-indigo-700 text-white py-3 rounded-md hover:bg-indigo-800 transition duration-300 ease-in-out"
-              >
-                {editingProduct ? "Actualizar " : "Cargar "}
-              </button>
-              {editingProduct && (
-                <button
-                  type="button"
-                  onClick={handleCancelEdit}
-                  className="w-[130px] bg-gray-500 text-white py-3 rounded-md hover:bg-gray-600 transition duration-300 ease-in-out"
-                >
-                  Cancelar
-                </button>
-              )}
+          </div>
+        ) : (
+          <div className="w-full p-4">
+            <div className="bg-yellow-100 border border-yellow-200 text-yellow-800 p-4 rounded-md">
+              <p>Inicia sesión para subir un producto.</p>
             </div>
-          </form>
-        </section>
-      ) : (
-        <section className="bg-yellow-100 border border-yellow-200 text-yellow-800 p-4 rounded-md mb-8">
-          <p>Inicia sesión para subir un producto.</p>
-        </section>
-      )}
-
-      <ProductTable handleEditProduct={handleEditProduct} />
+          </div>
+        )}
+      </div>
     </div>
   );
 };
